@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reception Social Media Training</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f4f6f8;
+margin:0;
+}
+
+header{
+background:#1f3c88;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.slide{
+display:none;
+padding:40px;
+max-width:900px;
+margin:auto;
+}
+
+.active{
+display:block;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+button{
+padding:10px 15px;
+margin:10px;
+border:none;
+background:#1f3c88;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+textarea{
+width:100%;
+height:120px;
+margin-top:10px;
+}
+
+.nav{
+position:fixed;
+bottom:20px;
+width:100%;
+text-align:center;
+}
+
+.score{
+position:fixed;
+top:10px;
+left:10px;
+background:white;
+padding:10px;
+border-radius:8px;
+}
+
+.chat{
+background:#eef2ff;
+padding:10px;
+border-radius:8px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Simulazione Reception + Social Media</h1>
+
+<p>Training pratico per addetti alla reception</p>
+
+</header>
+
+<div class="score">
+Punteggio: <span id="score">0</span>
+</div>
+
+
+<section class="slide active">
+
+<h2>Benvenuta nel training</h2>
+
+<div class="card">
+
+<p>Oggi imparerai a:</p>
+
+<ul>
+<li>gestire messaggi social</li>
+<li>creare contenuti</li>
+<li>rispondere alle recensioni</li>
+<li>promuovere il territorio</li>
+</ul>
+
+</div>
+
+</section>
+
+
+<section class="slide">
+
+<h2>Quiz Instagram</h2>
+
+<div class="card">
+
+<p>Quale contenuto attira più ospiti?</p>
+
+<button onclick="answer(true)">Colazione tipica + vista mare</button>
+
+<button onclick="answer(false)">Listino prezzi</button>
+
+<button onclick="answer(false)">Foto corridoio</button>
+
+</div>
+
+</section>
+
+
+<section class="slide">
+
+<h2>Simulazione Chat Cliente</h2>
+
+<div class="card">
+
+<div class="chat">
+Cliente: Buongiorno! Avete una camera dal 10 al 12 luglio?
+</div>
+
+<textarea placeholder="Scrivi la risposta"></textarea>
+
+</div>
+
+</section>
+
+
+<section class="slide">
+
+<h2>Recensione Cliente</h2>
+
+<div class="card">
+
+<p>
+Recensione: posizione fantastica ma WiFi lento
+</p>
+
+<textarea placeholder="Rispondi alla recensione"></textarea>
+
+</div>
+
+</section>
+
+
+<section class="slide">
+
+<h2>Laboratorio Post Instagram</h2>
+
+<div class="card">
+
+<textarea placeholder="Scrivi un post per un B&B nel Salento"></textarea>
+
+<button onclick="generatePost()">Genera esempio</button>
+
+<p id="aiPost"></p>
+
+</div>
+
+</section>
+
+
+<section class="slide">
+
+<h2>Complimenti</h2>
+
+<div class="card">
+
+<h3 id="badge"></h3>
+
+</div>
+
+</section>
+
+
+<div class="nav">
+
+<button onclick="prevSlide()">Indietro</button>
+<button onclick="nextSlide()">Avanti</button>
+
+</div>
+
+
+<script>
+
+let current = 0
+let slides = document.querySelectorAll(".slide")
+
+let score = 0
+
+function showSlide(n){
+
+slides.forEach(s => s.classList.remove("active"))
+slides[n].classList.add("active")
+
+if(n === slides.length-1){
+
+finish()
+
+}
+
+}
+
+function nextSlide(){
+
+if(current < slides.length-1){
+
+current++
+
+}
+
+showSlide(current)
+
+}
+
+function prevSlide(){
+
+if(current > 0){
+
+current--
+
+}
+
+showSlide(current)
+
+}
+
+function answer(correct){
+
+if(correct){
+
+score += 10
+document.getElementById("score").innerText = score
+
+}
+
+}
+
+function finish(){
+
+let badge = document.getElementById("badge")
+
+if(score >= 10){
+
+badge.innerHTML = "🏆 Reception Social Media Ready"
+
+}else{
+
+badge.innerHTML = "👍 Continua ad allenarti"
+
+}
+
+}
+
+function generatePost(){
+
+let text = "🌅 Buongiorno dal Salento! Colazione tipica pugliese e vista mare per i nostri ospiti."
+
+document.getElementById("aiPost").innerText = text
+
+}
+
+</script>
+
+</body>
+</html>
